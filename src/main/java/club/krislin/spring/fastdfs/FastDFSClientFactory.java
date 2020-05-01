@@ -35,14 +35,14 @@ public class FastDFSClientFactory implements PooledObjectFactory<FastDFSClient> 
 
         List<String> szTrackerServers = fastDfsConfiguration.getTracker_server();
 
-        if(szTrackerServers == null) {
+        if (szTrackerServers == null) {
             throw new MyException("item \"tracker_server\" in fdfs_client.conf not found");
         } else {
             InetSocketAddress[] tracker_servers = new InetSocketAddress[szTrackerServers.size()];
 
-            for(int i = 0; i < szTrackerServers.size(); ++i) {
+            for (int i = 0; i < szTrackerServers.size(); ++i) {
                 String[] parts = szTrackerServers.get(i).split(":", 2);
-                if(parts.length != 2) {
+                if (parts.length != 2) {
                     throw new MyException("the value of item \"tracker_server\" is invalid, the correct format is host:port");
                 }
 

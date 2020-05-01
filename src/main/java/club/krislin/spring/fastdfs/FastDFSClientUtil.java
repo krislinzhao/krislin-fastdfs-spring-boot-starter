@@ -8,10 +8,7 @@ import org.csource.fastdfs.ProtoCommon;
 import java.io.UnsupportedEncodingException;
 import java.security.NoSuchAlgorithmException;
 
-
 /**
- * FastDFSClient工具
- *
  * @author krislin
  * @date 2020/05/01
  */
@@ -113,13 +110,14 @@ public class FastDFSClientUtil {
      */
     public String getSourceUrl(String remoteFilename, String group) throws UnsupportedEncodingException, NoSuchAlgorithmException, MyException {
         String httpserver = fastDFSProperties.getHttpserver();
-        httpserver  = httpserver.endsWith("/") ? httpserver:httpserver+"/";
+        httpserver = httpserver.endsWith("/") ? httpserver : httpserver + "/";
 
-        int lts = (int)(System.currentTimeMillis() / 1000);
-        remoteFilename = remoteFilename.replace(group+"/","");//替换掉group
+        int lts = (int) (System.currentTimeMillis() / 1000);
+        //替换掉group
+        remoteFilename = remoteFilename.replace(group + "/", "");
 
         String token = ProtoCommon.getToken(remoteFilename, lts, ClientGlobal.getG_secret_key());
-        return  httpserver + group + "/" + remoteFilename + "?token=" + token + "&ts=" + lts;
+        return httpserver + group + "/" + remoteFilename + "?token=" + token + "&ts=" + lts;
     }
 
 
@@ -130,35 +128,23 @@ public class FastDFSClientUtil {
      */
     public String getSourceUrl(String remoteFilename) throws UnsupportedEncodingException, NoSuchAlgorithmException, MyException {
 
-        if(remoteFilename != null && !remoteFilename.equals("")){
+        if (remoteFilename != null && !"".equals(remoteFilename)) {
             String httpserver = fastDFSProperties.getHttpserver();
-            httpserver  = httpserver.endsWith("/") ? httpserver:httpserver+"/";
+            httpserver = httpserver.endsWith("/") ? httpserver : httpserver + "/";
 
-            String group = remoteFilename.substring(0,remoteFilename.indexOf("/"));
+            String group = remoteFilename.substring(0, remoteFilename.indexOf("/"));
 
-            int lts = (int)(System.currentTimeMillis() / 1000);
-            remoteFilename = remoteFilename.replace(group+"/","");//替换掉group/
+            int lts = (int) (System.currentTimeMillis() / 1000);
+            //替换掉group/
+            remoteFilename = remoteFilename.replace(group + "/", "");
 
-            ClientGlobal.setG_charset(fastDFSProperties.getCharset());//字符集
+            //字符集
+            ClientGlobal.setG_charset(fastDFSProperties.getCharset());
             ClientGlobal.setG_secret_key(fastDFSProperties.getHttp_secret_key());
             String token = ProtoCommon.getToken(remoteFilename, lts, ClientGlobal.getG_secret_key());
-            return  httpserver + group + "/" + remoteFilename + "?token=" + token + "&ts=" + lts;
+            return httpserver + group + "/" + remoteFilename + "?token=" + token + "&ts=" + lts;
         }else{
             return "";
         }
     }
-
-
-
-    /*public String uploadFile(MultipartFile picFile) throws Exception {
-        //判断图片是否为空
-        if (picFile.isEmpty()) {
-            return "";
-        }
-        //获取图片扩展名
-        String originalFilename = picFile.getOriginalFilename();
-        //取扩展名，不要"."
-        String extName = originalFilename.substring(originalFilename.lastIndexOf(".") + 1);
-        return uploadFile(picFile.getBytes(), extName);
-    }*/
 }

@@ -13,7 +13,7 @@ import org.springframework.context.annotation.Configuration;
  */
 @Configuration
 //当classpath下面有这三个类才做自动装配
-@ConditionalOnClass(value = {FastDFSClientFactory.class,FastDFSClientPool.class,FastDFSClientUtil.class,})
+@ConditionalOnClass(value = {FastDFSClientFactory.class, FastDFSClientPool.class, FastDFSClientUtil.class,})
 //@EnableConfigurationProperties 相当于把使用 @ConfigurationProperties的类注入。
 @EnableConfigurationProperties(FastDFSProperties.class)
 public class AutoConfigure {
@@ -32,11 +32,13 @@ public class AutoConfigure {
 
     /**
      * 当没有FastDFSClientUtil，就把FastDFSClientUtil作为Bean注入Spring
+     *
+     * @return
      */
     @Bean
     @ConditionalOnMissingBean
-    FastDFSClientUtil fastDFSClientUtil (){
-        return  new FastDFSClientUtil(properties);
+    FastDFSClientUtil fastDFSClientUtil() {
+        return new FastDFSClientUtil(properties);
     }
 
 }

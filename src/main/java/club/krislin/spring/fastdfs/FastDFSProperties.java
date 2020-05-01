@@ -5,14 +5,6 @@ import org.springframework.boot.context.properties.ConfigurationProperties;
 import java.util.ArrayList;
 import java.util.List;
 
-/**
- * @Package club.krislin.spring.fastdfs
- * @ClassName FastDFSProperties
- * @Description TODO
- * @Date 20/5/1 13:27
- * @Author krislin
- * @Version V1.0
- */
 @ConfigurationProperties(prefix = "krislin.fastdfs")
 public class FastDFSProperties {
 
@@ -24,7 +16,9 @@ public class FastDFSProperties {
     private Boolean http_anti_steal_token = false;
     private String http_secret_key = "";
     private Integer http_tracker_http_port = 8987;
-    //下面这个实际上不是fastdfs的属性，为了方便实用自定义属性，表示访问nginx的http地址
+    /**
+     * 下面这个实际上不是fastdfs的属性，为了方便实用自定义属性，表示访问nginx的http地址
+     */
     private String httpserver;
 
     public Integer getHttp_tracker_http_port() {
