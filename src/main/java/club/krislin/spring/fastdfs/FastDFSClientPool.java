@@ -4,7 +4,6 @@ package club.krislin.spring.fastdfs;
 import org.apache.commons.pool2.impl.GenericObjectPool;
 import org.apache.commons.pool2.impl.GenericObjectPoolConfig;
 
-
 /**
  * @author krislin
  * @date 2020/05/01
@@ -15,7 +14,7 @@ class FastDFSClientPool {
     private static FastDFSProperties fastDFSProperties;
 
     FastDFSClientPool(FastDFSProperties fastDFSProperties) {
-        club.krislin.spring.fastdfs.FastDFSClientPool.fastDFSProperties = fastDFSProperties;
+        FastDFSClientPool.fastDFSProperties = fastDFSProperties;
     }
 
     private static class Nested {
@@ -47,7 +46,8 @@ class FastDFSClientPool {
 
     /**
      * 获取连接池单例
-     * @return
+     *
+     * @return 连接池单例
      */
     static GenericObjectPool<FastDFSClient> getInstance(){
         return Nested.pool;
